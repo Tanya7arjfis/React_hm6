@@ -1,13 +1,15 @@
-import React from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../store/actions/contacts'
 
-export default function Form({ contacts, onaddContact, oncancel }) {
-
+export default function Form({ oncancel }) {
   const [item, setItem] = useState({
     name: '',
-    username: '',
-    phone: ''
+    surname: '',
+    tel: ''
   });
+
+  const dispatch = useDispatch()
 
   function changeHandler(e) {
     setItem({
@@ -19,11 +21,11 @@ export default function Form({ contacts, onaddContact, oncancel }) {
   function submitHandler(e) {
     e.preventDefault();
     console.log(item);
-    onaddContact(item.name, item.username, item.phone);
+    dispatch(addContact(item))
     setItem({
       name: '',
-      username: '',
-      phone: ''
+      surname: '',
+      tel: ''
     })
     oncancel();
   }
@@ -46,20 +48,20 @@ export default function Form({ contacts, onaddContact, oncancel }) {
         key={1} />
       <input
         type='text'
-        placeholder='Username'
-        name='username'
+        placeholder='Surname'
+        name='surname'
         onChange={changeHandler}
         value={item.username}
         key={2} />
       <input
         type='tel'
         placeholder='Phone'
-        name='phone'
+        name='tel'
         onChange={changeHandler}
         value={item.phone}
         key={3} />
       <button key={4} type="submit" className='btn'>Save contact</button>
-      <button key={5} className='btn' onClick={cancel} >Cancel</button>
+      <button key={5} className='btn' onClick={cancel}>Cancel</button>
     </form>
   )
 }
