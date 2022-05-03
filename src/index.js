@@ -5,10 +5,14 @@ import App from './App';
 import store from './store/index';
 import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
+import Container from '@mui/material/Container';
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <App />
+    <Container maxWidth="lg">
+      <App/>
+    </Container>
   </Provider>
 );
 
